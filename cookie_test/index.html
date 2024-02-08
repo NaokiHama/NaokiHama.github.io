@@ -51,19 +51,41 @@
     outline: none;
     box-shadow: 0 0 0 2px rgba(76,175,80,0.5);
 }
+
+#cookieConsent #iyadesu {
+    padding: 10px 20px;
+    background-color: #f14021;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#cookieConsent #iyadesu:hover {
+    background-color: #b14419;
+}
+
+#cookieConsent #iyadesu:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(175, 96, 76, 0.5);
+}
 </style>
 </head>
 <body>
 <div id="cookieStatus">cookieがありません。</div>
 <div id="cookieConsent" style="display:none;">
-    当サイトではCookieを使用します。<button id="acceptCookie">許可</button>
+    当サイトではCookieを使用します。<button id="acceptCookie">許可</button><button id="iyadesu">拒否</button>
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', (event) => {
     checkCookie();
     document.getElementById('acceptCookie').addEventListener('click', function() {
-        setCookie("testCookie", "保存保存保存！！！！！！！", 365);
+        setCookie("testCookie", "保存されたCookieがこれ", 365);
         checkCookie();
+        document.getElementById('cookieConsent').style.display = 'none';
+    });
+    document.getElementById('iyadesu').addEventListener('click', function() {
         document.getElementById('cookieConsent').style.display = 'none';
     });
 });
