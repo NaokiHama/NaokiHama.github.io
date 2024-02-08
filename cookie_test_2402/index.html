@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Cookie Test Page</title>
+<style>
+    body {
+    font-family: 'Noto Sans JP', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+#cookieStatus {
+    padding: 20px;
+    text-align: center;
+}
+
+#cookieConsent {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    z-index: 1000;
+    text-align:center;
+}
+
+#cookieConsent button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#cookieConsent button:hover {
+    background-color: #45a049;
+}
+
+#cookieConsent button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(76,175,80,0.5);
+}
+
+#cookieConsent #iyadesu {
+    padding: 10px 20px;
+    background-color: #f14021;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#cookieConsent #iyadesu:hover {
+    background-color: #b14419;
+}
+
+#cookieConsent #iyadesu:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(175, 96, 76, 0.5);
+}
+</style>
+</head>
+<body>
+<div id="cookieStatus">cookieがありません。</div>
+<div id="cookieConsent" style="display:none;">
+    当サイトではCookieを使用します。<button id="acceptCookie">許可</button><button id="iyadesu">拒否</button>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    checkCookie();
+    document.getElementById('acceptCookie').addEventListener('click', function() {
+        setCookie("testCookie", "保存されたCookieがこれ", 365);
+        checkCookie();
+        document.getElementById('cookieConsent').style.display = 'none';
+    });
+    document.getElementById('iyadesu').addEventListener('click', function() {
+        document.getElementById('cookieConsent').style.display = 'none';
+    });
+});
+
+function checkCookie() {
+    let cookieStatusText = document.getElementById('cookieStatus');
+    let cookieConsentDiv = document.getElementById('cookieConsent');
+    let cookie = getCookie("testCookie");
+    if (cookie != "") {
+        cookieStatusText.innerHTML = "cookieがありますcookieがありまcookieがありcookieがあcookieがcookiecookicookcoococ";
+        cookieConsentDiv.style.display = 'none';
+    } else {
+        cookieConsentDiv.style.display = 'block';
+    }
+}
+
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        let date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
+function getCookie(name) {
+    let nameEQ = name + "=";
+    let ca = document.cookie.split(';');
+    for(let i=0;i < ca.length;i++) {
+        let c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return "";
+}
+
+</script>
+</body>
+</html>
