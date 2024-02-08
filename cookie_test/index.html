@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Cookie Test Page</title>
 <style>
-body {
+    body {
     font-family: 'Noto Sans JP', sans-serif;
     margin: 0;
     padding: 0;
@@ -12,10 +12,12 @@ body {
     color: #333;
     background-color: #f4f4f4;
 }
+
 #cookieStatus {
     padding: 20px;
     text-align: center;
 }
+
 #cookieConsent {
     position: fixed;
     bottom: 0;
@@ -29,8 +31,8 @@ body {
     align-items: center;
     gap: 20px;
     z-index: 1000;
-    text-align: center;
 }
+
 #cookieConsent button {
     padding: 10px 20px;
     background-color: #4CAF50;
@@ -40,46 +42,28 @@ body {
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
 #cookieConsent button:hover {
     background-color: #45a049;
 }
+
 #cookieConsent button:focus {
     outline: none;
     box-shadow: 0 0 0 2px rgba(76,175,80,0.5);
 }
-#cookieConsent #iyadesu {
-    padding: 10px 20px;
-    background-color: #f14021;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-left: 20px;
-}
-#cookieConsent #iyadesu:hover {
-    background-color: #b14419;
-}
-#cookieConsent #iyadesu:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(175, 96, 76, 0.5);
-}
 </style>
 </head>
 <body>
-<div id="cookieStatus">cookieが保存されていません。</div>
+<div id="cookieStatus">cookieがありません。</div>
 <div id="cookieConsent" style="display:none;">
-    当サイトではCookieを使用します。<button id="acceptCookie">許可</button><button id="iyadesu">拒否</button>
+    当サイトではCookieを使用します。<button id="acceptCookie">許可</button>
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', (event) => {
     checkCookie();
     document.getElementById('acceptCookie').addEventListener('click', function() {
-        setCookie("TestCookie", "cookieが保存されていますcookieが保存されていますcookieが保存されています", 365);
+        setCookie("testCookie", "保存保存保存！！！！！！！", 365);
         checkCookie();
-        document.getElementById('cookieConsent').style.display = 'none';
-    });
-    document.getElementById('iyadesu').addEventListener('click', function() {
         document.getElementById('cookieConsent').style.display = 'none';
     });
 });
@@ -89,7 +73,7 @@ function checkCookie() {
     let cookieConsentDiv = document.getElementById('cookieConsent');
     let cookie = getCookie("testCookie");
     if (cookie != "") {
-        cookieStatusText.innerHTML = "cookieが保存されていますcookieが保存されていますcookieが保存されています";
+        cookieStatusText.innerHTML = "cookieがありますcookieがありまcookieがありcookieがあcookieがcookiecookicookcoococ";
         cookieConsentDiv.style.display = 'none';
     } else {
         cookieConsentDiv.style.display = 'block';
