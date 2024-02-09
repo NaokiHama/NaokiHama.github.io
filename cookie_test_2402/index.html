@@ -83,7 +83,7 @@
     document.addEventListener('DOMContentLoaded', (event) => {
         checkCookie();
         document.getElementById('acceptCookie').addEventListener('click', function() {
-            setCookie("testCookie", "保存されたCookieがこれ", 365);
+            setCookie("testCookie", "保存されたCookieのValueがこれ", 365);
             checkCookie();
             document.getElementById('cookieConsent').style.display = 'none';
         });
@@ -97,7 +97,7 @@
         let cookieConsentDiv = document.getElementById('cookieConsent');
         let cookie = getCookie("testCookie");
         if (cookie != "") {
-            cookieStatusText.innerHTML = "cookieが保存されています。";
+            cookieStatusText.insertAdjacentHTML = ('beforeend','<b>Cookieが保存されています！</b>');
             cookieConsentDiv.style.display = 'none';
         } else {
             cookieConsentDiv.style.display = 'block';
