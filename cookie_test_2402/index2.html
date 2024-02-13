@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Cookie Test Page</title>
+<style>
+    body{
+        font-family:'Noto Sans JP',sans-serif;
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        color:#333;
+        background:#f4f4f4
+    }
+
+    #cookieStatus,#cookieConsent{
+        padding:20px;
+        text-align:center
+    }
+    #cookieConsent{
+        position:fixed;
+        bottom:0;
+        left:0;
+        width:100%;
+        background:#fff;
+        box-shadow:0 -2px 5px rgba(0,0,0,.2);
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        gap:20px;
+        z-index:1000;
+        display:none
+    }
+
+    button{
+        padding:10px 20px;
+        background:#4CAF50;
+        color:#fff;
+        border:none;
+        border-radius:5px;
+        cursor:pointer;
+        transition:background .3s
+    }
+    button:hover{background:#45a049}
+    button:focus{
+        outline:none;
+        box-shadow:0 0 0 2px rgba(76,175,80,.5)
+    }
+
+    .iyadesu{background-color:#f14021;}
+    .iyadesu:hover{background-color:#b14419;}
+    .iyadesu:focus{
+        outline:none;
+        box-shadow:0 0 0 2px rgba(175,96,76,.5);
+    }
+</style>
+</head>
+<body>
+    <div id="cookieStatus">cookieがありません。</div>
+    <div id="cookieConsent">当サイトではCookieを使用します。
+        <button onclick="c('testCookie','保存されたCookieのValueがこちら',365)">許可</button>
+        <button class="iyadesu" onclick="d()">拒否</button>
+    </div>
+<script>
+    document.addEventListener('DOMContentLoaded', _ => {
+        let c=getCookie("testCookie");
+        c?e("<b>Cookieが保存されています！</b>"):d(true);
+    });
+    function c(n,v,d){
+        let e="";if(d){
+            let t=new Date();
+            t.setTime(t.getTime()+(d*864e5));
+            e="; expires="+t.toString();
+        }
+        document.cookie=n+"="+(v||"")+e+"; path=/";
+        checkCookie();
+    }
+    function d(s){
+        document.getElementById('cookieConsent').style.display=s?'flex':'none';
+    }
+    function e(t){
+        document.getElementById('cookieStatus').innerHTML=t;
+        d();
+    }
+    function getCookie(n){
+        let e=n+"=",c=document.cookie.split(';');
+        for(let i=0;i<c.length;i++){
+            let a=c[i];
+            while(a.charAt(0)==' ')a=a.substring(1);
+            if(a.indexOf(e)==0)return a.substring(e.length);
+        }
+        return"";
+    }
+</script>
+</body>
+</html>
