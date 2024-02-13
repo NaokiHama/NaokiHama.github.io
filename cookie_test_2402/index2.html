@@ -56,41 +56,26 @@
 </style>
 </head>
 <body>
-    <div id="cookieStatus">cookieがありません。</div>
-    <div id="cookieConsent">当サイトではCookieを使用します。
-        <button onclick="c('testCookie','保存されたCookieのValueがこちら',365)">許可</button>
-        <button class="iyadesu" onclick="d()">拒否</button>
-    </div>
+<div id="cookieStatus">cookieがありません。</div>
+<div id="cookieConsent">当サイトではCookieを使用します。<button onclick="c('testCookie','保存',365),d(),e('<b>Cookieが保存されています！</b>')">許可</button><button class="iyadesu" onclick="d()">拒否</button></div>
 <script>
-    document.addEventListener('DOMContentLoaded', _ => {
-        let c=getCookie("testCookie");
-        c?e("<b>Cookieが保存されています！</b>"):d(true);
-    });
-    function c(n,v,d){
-        let e="";if(d){
-            let t=new Date();
-            t.setTime(t.getTime()+(d*864e5));
-            e="; expires="+t.toString();
-        }
-        document.cookie=n+"="+(v||"")+e+"; path=/";
-        checkCookie();
-    }
-    function d(s){
-        document.getElementById('cookieConsent').style.display=s?'flex':'none';
-    }
-    function e(t){
-        document.getElementById('cookieStatus').innerHTML=t;
-        d();
-    }
-    function getCookie(n){
-        let e=n+"=",c=document.cookie.split(';');
-        for(let i=0;i<c.length;i++){
-            let a=c[i];
-            while(a.charAt(0)==' ')a=a.substring(1);
-            if(a.indexOf(e)==0)return a.substring(e.length);
-        }
-        return"";
-    }
+document.addEventListener('DOMContentLoaded',_=>{
+    getCookie("testCookie")?e("<b>Cookieが保存されています！</b>"):d(1)
+});
+function c(n,v,d){
+    let t=new Date();
+    t.setTime(t.getTime()+(d*864e5));
+    document.cookie=n+"="+v+";expires="+t.toUTCString()+";path=/";
+}
+function d(s){
+    document.getElementById('cookieConsent').style.display=s?'flex':'none';
+}
+function e(t){
+    document.getElementById('cookieStatus').innerHTML=t;
+}
+function getCookie(n){
+    return document.cookie.split(';').some(c=>c.trim().startsWith(n+"="));
+}
 </script>
 </body>
 </html>
